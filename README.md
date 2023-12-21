@@ -6,27 +6,27 @@ This project provides a fully functional Zombie NPC AI enemy for Unreal Engine, 
 
 ## Features
 
-### 1. Sense Hearing
+### 1. Sense Hearing (Done)
 
 The Zombie NPC has a sophisticated sense of hearing that allows it to detect sounds within a certain radius. This includes both player-generated noise and environmental sounds.
 
-### 2. Sight Hearing
+### 2. Sight Hearing (Done)
 
-The AI enemy is equipped with sight hearing capabilities, enabling it to visually detect players within its line of sight.
+The AI enemy is equipped with sight-hearing capabilities, enabling it to visually detect players within its line of sight.
 
-### 3. Damage Sense
+### 3. Damage Sense (Progress)
 
 The Zombie NPC responds dynamically to damage, altering its behavior based on the severity and type of damage it receives.
 
-### 4. Chasing Players
+### 4. Chasing Players (Done)
 
 When a player is detected, the Zombie NPC engages in pursuit, creating an immersive and challenging experience for players.
 
-### 5. Investigating Noise Behavior
+### 5. Investigating Noise Behavior (Done)
 
 The AI is programmed to investigate sources of noise, enhancing its realism and creating unpredictable scenarios for players.
 
-### 6. Advanced Roam
+### 6. Advanced Roam (Done)
 
 The Zombie NPC exhibits advanced roaming behavior, making it more dynamic and interesting for players to encounter.
 
