@@ -73,6 +73,7 @@ void AZombieBaseAIController::OnTargetDetected(AActor* Actor, FAIStimulus Stimul
 		}
 		else if (Stimulus.Type.Name == DamageConfig->GetSenseID().Name)
 		{
+			
 		}
 	}
 }

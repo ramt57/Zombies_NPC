@@ -9,6 +9,15 @@
 #include "Perception/AISenseConfig_Sight.h"
 
 
+int AZombieBase::MeleeAttack_Implementation()
+{
+	if(AttackMontage)
+	{
+		PlayAnimMontage(AttackMontage);
+	}
+	return 0;
+}
+
 void AZombieBase::SetUpStimuliSource()
 {
 	StimuliSourceComponent = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>(TEXT("Stimulus"));
@@ -25,19 +34,19 @@ void AZombieBase::SetNpcState(const EZombieState State)
 	switch (State)
 	{
 	case EZombieState::ETIP_IDLE:
-		GetCharacterMovement()->MaxWalkSpeed =35.f;
+		GetCharacterMovement()->MaxWalkSpeed =40.f;
 		break;;
 	case EZombieState::ETIP_ROAM:
-		GetCharacterMovement()->MaxWalkSpeed =35.f;
+		GetCharacterMovement()->MaxWalkSpeed =40.f;
 		break;
 	case EZombieState::ETIP_SEARCH:
-		GetCharacterMovement()->MaxWalkSpeed =35.f;
+		GetCharacterMovement()->MaxWalkSpeed =40.f;
 		break;
 	case EZombieState::ETIP_CHASE:
-		GetCharacterMovement()->MaxWalkSpeed =150.f;
+		GetCharacterMovement()->MaxWalkSpeed =75.f;
 		break;
 	case EZombieState::ETIP_HYPER_CHASE:
-		GetCharacterMovement()->MaxWalkSpeed =200.f;
+		GetCharacterMovement()->MaxWalkSpeed =350.f;
 		break;
 	default:
 		break;

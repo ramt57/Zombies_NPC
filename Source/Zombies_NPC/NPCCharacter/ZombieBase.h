@@ -4,19 +4,26 @@
 
 #include "CoreMinimal.h"
 #include "EZombieState.h"
+#include "ZombieActionInterface.h"
 #include "GameFramework/Character.h"
 #include "ZombieBase.generated.h"
 
 UCLASS()
-class ZOMBIES_NPC_API AZombieBase : public ACharacter
+class ZOMBIES_NPC_API AZombieBase : public ACharacter, public IZombieActionInterface
 {
+public:
+	virtual int MeleeAttack_Implementation() override;
+private:
 	GENERATED_BODY()
+
 private:
 	class UAIPerceptionStimuliSourceComponent* StimuliSourceComponent;
 	void SetUpStimuliSource();
 	EZombieState NpcState;
-
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="Montage", meta=(AllowPrivateAccess="true"))
+	UAnimMontage* AttackMontage;
 public:
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE EZombieState GetNpcState() const
 	{
 		return NpcState;
