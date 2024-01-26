@@ -20,5 +20,11 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AI", meta=(AllowPrivateAccess="true"))
-	float MeleeRange = 100.f;
+	float MeleeRange = 150.f;
+	UPROPERTY()
+	const APawn* NpcPawn;
+	UPROPERTY()
+	const AActor* TargetCharacter;
+protected:
+	virtual void TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
 };

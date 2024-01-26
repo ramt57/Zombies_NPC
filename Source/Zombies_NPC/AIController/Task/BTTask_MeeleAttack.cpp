@@ -15,16 +15,17 @@ UBTTask_MeeleAttack::UBTTask_MeeleAttack()
 EBTNodeResult::Type UBTTask_MeeleAttack::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	auto const InRange = OwnerComp.GetBlackboardComponent()->GetValueAsBool(GetSelectedBlackboardKey());
-	if(!InRange)
-	{
-		FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
-		return EBTNodeResult::Succeeded;
-	}
 	const AAIController* Controller = Cast<AAIController>(OwnerComp.GetAIOwner());
 	AZombieBase* NpcPawn = Cast<AZombieBase>(Controller->GetPawn());
-	if(NpcPawn && NpcPawn->GetClass()->ImplementsInterface(UZombieActionInterface::StaticClass()))
+	if (!InRange)
 	{
-		if(MontageHasFinished(NpcPawn))
+		FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
+		NpcPawn->GetMesh()->GetAnimInstance()->Montage_Stop(1, NpcPawn->GetCurrentMontage());
+		return EBTNodeResult::Succeeded;
+	}
+	if (NpcPawn && NpcPawn->GetClass()->ImplementsInterface(UZombieActionInterface::StaticClass()))
+	{
+		if (MontageHasFinished(NpcPawn))
 		{
 			IZombieActionInterface::Execute_MeleeAttack(NpcPawn);
 		}

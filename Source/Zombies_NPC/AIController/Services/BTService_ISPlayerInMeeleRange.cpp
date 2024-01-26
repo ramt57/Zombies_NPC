@@ -10,14 +10,30 @@ UBTService_ISPlayerInMeeleRange::UBTService_ISPlayerInMeeleRange()
 {
 	bNotifyBecomeRelevant = true;
 	NodeName = TEXT("Is Player Melee In Range");
+	NpcPawn = nullptr;
+	TargetCharacter = nullptr;
 }
 
 void UBTService_ISPlayerInMeeleRange::OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
-	const AAIController* Controller = Cast<AAIController>(OwnerComp.GetAIOwner());
-	const APawn* NpcPawn = Cast<APawn>(Controller->GetPawn());
-	const AActor* TargetCharacter = Cast<AActor>(OwnerComp.GetBlackboardComponent()->GetValueAsObject("TargetActor"));
-	OwnerComp.GetBlackboardComponent()->SetValueAsBool(GetSelectedBlackboardKey(),
-	                                                   NpcPawn->GetDistanceTo(TargetCharacter) <= MeleeRange);
 	Super::OnBecomeRelevant(OwnerComp, NodeMemory);
+	const AAIController* Controller = Cast<AAIController>(OwnerComp.GetAIOwner());
+	NpcPawn = Cast<APawn>(Controller->GetPawn());
+	TargetCharacter = Cast<AActor>(
+		OwnerComp.GetBlackboardComponent()->GetValueAsObject("TargetActor"));
+}
+
+void UBTService_ISPlayerInMeeleRange::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
+{
+	Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
+	if (TargetCharacter)
+	{
+		OwnerComp.GetBlackboardComponent()->SetValueAsBool(GetSelectedBlackboardKey(),
+		                                                   NpcPawn->GetDistanceTo(TargetCharacter) <= MeleeRange);
+	}
+	else
+	{
+		OwnerComp.GetBlackboardComponent()->SetValueAsBool(GetSelectedBlackboardKey(),
+		                                                   false);
+	}
 }

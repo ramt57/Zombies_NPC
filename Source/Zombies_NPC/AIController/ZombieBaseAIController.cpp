@@ -62,8 +62,8 @@ void AZombieBaseAIController::OnTargetDetected(AActor* Actor, FAIStimulus Stimul
 		{
 			// The stimulus is related to sight
 			GetBlackboardComponent()->SetValueAsBool("CanSensePlayer", Stimulus.IsActive());
-			GetBlackboardComponent()->SetValueAsObject("TargetActor", Actor);
-			// The stimulus is related to hearing
+			GetBlackboardComponent()->SetValueAsObject("TargetActor", Stimulus.IsActive() ? Actor : nullptr);
+			// The stimulus is related to last player known location
 			GetBlackboardComponent()->SetValueAsVector("TargetLocation", Actor->GetActorLocation());
 		}
 		else if (Stimulus.Type.Name == HearConfig->GetSenseID().Name)
@@ -73,7 +73,6 @@ void AZombieBaseAIController::OnTargetDetected(AActor* Actor, FAIStimulus Stimul
 		}
 		else if (Stimulus.Type.Name == DamageConfig->GetSenseID().Name)
 		{
-			
 		}
 	}
 }
